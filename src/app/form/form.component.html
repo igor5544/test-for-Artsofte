@@ -1,0 +1,70 @@
+<form [formGroup]="bookTiketsForm" (ngSubmit)="onSubmit()" class="d-flex flex-column form">
+
+  <label class="mb-4 d-flex input-wrapper">
+    <span class="lable">Имя</span>
+    <div class="control-wrapper">
+      <input formControlName="nameControl" type="text" placeholder="Имя клиента" [readonly]="successSend"
+        class="form-control mb-2">
+      <div class="alert alert-danger mb-0"
+        [@openClose]="nameControl?.invalid && (nameControl?.dirty || nameControl?.touched) ? 'open' : 'closed'">
+       <p *ngIf="nameControl?.errors?.required" class="mb-0">
+          {{requiredAlertText}}
+        </p>
+        <p *ngIf="nameControl?.errors?.pattern" class="mb-0">
+          Поле может содержать только символы кириллицы
+        </p>
+        <p *ngIf="nameControl?.errors?.maxlength" class="mb-0">
+          Максимальная длина поля {{nameControl?.errors?.maxlength.requiredLength}} символов
+        </p>
+      </div>
+    </div>
+  </label>
+
+  <label class="mb-4 d-flex input-wrapper input-wrapper--short">
+    <span class="lable">Age</span>
+    <div class="control-wrapper">
+      <input formControlName="ageControl" type="number" placeholder="0" [readonly]="successSend"
+        class="form-control form-control--number mb-2">
+      <div class="alert alert-danger mb-0"
+        [@openClose]="ageControl?.invalid && (ageControl?.dirty || ageControl?.touched) ? 'open' : 'closed'">
+        <p *ngIf="ageControl?.errors?.required" class="mb-0">
+          {{requiredAlertText}}
+        </p>
+        <p *ngIf="ageControl?.errors?.min" class="mb-0">
+          Возраст не может быть отрицательным
+        </p>
+      </div>
+    </div>
+  </label>
+
+  <label class="mb-4 d-flex input-wrapper input-wrapper--short">
+    <span class="lable">фильм</span>
+    <div class="control-wrapper">
+      <select formControlName="filmControl" (change)="filmChange()" [attr.disabled]="successSend ? '' : null"
+        class="form-control mb-2">
+        <option *ngFor="let film of films" [ngValue]="film">
+          {{film.title}}
+        </option>
+      </select>
+      <div class="alert alert-danger mb-0"
+        [@openClose]="filmControl?.invalid && (filmControl?.dirty || filmControl?.touched) ? 'open' : 'closed'">
+        <p class=mb-0>
+          {{requiredAlertText}}
+        </p>
+      </div>
+    </div>
+  </label>
+
+  <p class="alert alert-danger mb-0" [class.mb-4]="showAgeAlert"
+    [@openClose]="showAgeAlert && (nameControl?.dirty || nameControl?.touched) ? 'open' : 'closed'">
+    На выбранный фильм “{{filmControl?.value.title}}” действует ограничение по возрасту с {{filmControl?.value.age}}+
+  </p>
+
+  <p class="alert alert-success mb-0" [class.mb-4]="successSend"
+    [@openClose]="successSend && (nameControl?.dirty || nameControl?.touched) ? 'open' : 'closed'">
+    Данные успешно отправленны!
+  </p>
+
+  <input type="submit" value="Ok" [disabled]="bookTiketsForm.invalid || successSend"
+    class="btn btn-success mb-4 submit">
+</form>

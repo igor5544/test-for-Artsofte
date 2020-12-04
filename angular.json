@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "Artsofte"
+  "defaultProject": "Artsofte",
+  "cli": {
+    "analytics": "b97d3537-eeb9-4c82-9778-3d1dd5375001"
+  }
 }
