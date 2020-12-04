@@ -32,7 +32,7 @@ import {
 export class FormComponet {
   films = [
     { id: 1, title: 'История игрушек', age: 0 },
-    { id: 1, title: 'Человек паук', age: 12 },
+    { id: 1, title: 'Человек-паук', age: 12 },
   ];
 
   minAge = 0;

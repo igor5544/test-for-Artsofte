@@ -62,7 +62,7 @@
 
   <p class="alert alert-success mb-0" [class.mb-4]="successSend"
     [@openClose]="successSend && (nameControl?.dirty || nameControl?.touched) ? 'open' : 'closed'">
-    Данные успешно отправленны!
+    Данные успешно отправлены!
   </p>
 
   <input type="submit" value="Ok" [disabled]="bookTiketsForm.invalid || successSend"
